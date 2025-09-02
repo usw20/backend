@@ -1,0 +1,70 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: phantom-security
+
+  # MongoDB
+  data:
+    mongodb:
+      uri: mongodb://phantom_app:phantom_app_2025@localhost:27017/phantom_db
+      database: phantom_db
+
+  # CORS
+  web:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+      allowed-headers: "*"
+
+  # Jackson
+  jackson:
+    time-zone: Asia/Seoul
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  # Security 설정 - 기본 보안 비활성화
+  security:
+    user:
+      name: disabled
+      password: disabled
+
+# web server
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# JWT - Base64로 인코딩된 시크릿 키 사용
+app:
+  jwt:
+    secret: cGhhbnRvbS1zZWN1cml0eS1qd3Qtc2VjcmV0LWtleS1mb3ItdG9rZW4tZ2VuZXJhdGlvbi0yMDI1LWxvbmctZW5vdWdoLWZvci1obWFjLXNoYTI1Ng==
+    expiration: 86400000 # 24시간 (밀리초)
+
+# logging pattern
+logging:
+  level:
+    com.phantom.security: DEBUG
+    org.springframework.data.mongodb: DEBUG
+    org.springframework.security: DEBUG
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+---
+# development profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  # MongoDB
+  data:
+    mongodb:
+      uri: mongodb://phantom_app:phantom_app_2025@localhost:27017/phantom_db
+
+# Info
+logging:
+  level:
+    root: INFO
+    com.phantom.security: DEBUG
+    org.springframework.security: DEBUG
