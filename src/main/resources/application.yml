@@ -62,6 +62,40 @@ spring:
     mongodb:
       uri: mongodb://phantom_app:phantom_app_2025@localhost:27017/phantom_db
 
+# AI 서버 설정
+ai:
+  malware:
+    server:
+      url: http://localhost:5001
+  phishing:
+    server:
+      url: http://localhost:5002
+  chatbot:
+    server:
+      url: http://localhost:5003
+
+# logging pattern
+logging:
+  level:
+    com.phantom.security: DEBUG
+    org.springframework.data.mongodb: DEBUG
+    org.springframework.security: DEBUG
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+---
+# development profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  # MongoDB
+  data:
+    mongodb:
+      uri: mongodb://phantom_app:phantom_app_2025@localhost:27017/phantom_db
+
 # Info
 logging:
   level:
